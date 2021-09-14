@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: crashlooppod
+spec:
+  restartPolicy: Always
+  containers:
+  - name: crashloopcontainer
+    image: ubuntu
+    command: ['sh', '-c', 'echo "Selam ben 3 saniye calistim ve isim bitti!" && sleep 3']

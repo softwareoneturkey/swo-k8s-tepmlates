@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: complatedpod
+spec:
+  restartPolicy: Never
+  containers:
+  - name: complatedcontainer
+    image: ubuntu
+    command: ['sh', '-c', 'echo "Selam ben 20 saniye calistim ve isim bitti!" && sleep 20']

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: errorpod
+spec:
+  restartPolicy: Never
+  containers:
+  - name: errorcontainer
+    image: ubuntu
+    command: ['sh', '-c', 'abc']
