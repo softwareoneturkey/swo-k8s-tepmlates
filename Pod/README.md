@@ -1,5 +1,3 @@
-
-
 <p align="center">
   <img src="https://user-images.githubusercontent.com/55376595/133259669-772cdfbf-4a9b-4f51-ad65-771615ee18c6.png"/>
 </p>
@@ -160,6 +158,72 @@ kubectl apply -f 5_CrashLoopBackOff_pod.yaml
 kubectl get pods
 ```
 --> komutunu girdiğimizde crashlooppod pod'unun bir süre sonra " CrashLoopBackOff " statüsüne geçtiğini görmekteyiz. 
+
+
+Kubernetes komutlarının bazıları:
+
+
+Bir objenin özelliklerini ayrıntılı incelemek  : 
+```bash
+kubectl describe obje_tipi obje_name
+```
+Bir pod'un loglarını görüntülemek :
+```bash
+kubectl logs pod_name
+```
+Kubernetes de bir objeyi silmek :
+```bash
+kubectl delete obje_tipi obje_name
+```
+
+Yaml dosyasından obje oluşturma :
+```bash
+kubectl apply -f example.yaml
+```
+
+Yaml dosyasından oluşturulan objeyi silme : 
+```bash
+kubectl delete  -f example.yaml
+```
+
+Bir pod'un içine bağlanıp komut çalıştırabilmek :
+```bash
+kubectl exec -it pod_name --sh
+```
+Bir pod'un içindeki konteyner'a  bağlanıp komut çalıştırabilmek :
+```bash
+kubectl exec -it pod_name -c container_name --/bin/sh
+
+```
+
+Label ve port özelliklerini  ekleyerek  pod oluşturma.
+```bash
+kubectl run "pod_name" --image="image_name" --port="port_numarası" --labels"key:value" --restart=Never
+```
+
+impertive yöntemler pod olusturma 
+```bash
+kubectl run pod_name --image= image_name
+```
+
+Cluster'da bulunan bir Kubernetes objesini varsayılan text editörü ile açarak özelliklerini güncelleme.
+
+```bash
+kubectl edit "obje_tipi" "obje_name"
+```
+
+kubernetes pod'ları listeleme
+```bash
+kubectl get pods
+```
+
+
+Tüm kubernetes objelerini listeleme
+```bash
+kubectl get all
+```
+
+
 
 
 * [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/ReplicaSet%20-%20ReplicationController) 
