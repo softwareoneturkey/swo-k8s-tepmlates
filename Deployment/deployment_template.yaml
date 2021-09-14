@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploymenttemplate
+  labels:
+    team: development
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      team: development
+  template:
