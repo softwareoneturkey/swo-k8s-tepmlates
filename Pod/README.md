@@ -103,7 +103,7 @@ kubectl get pods
 
 
 ###
-**4_error_pod.yaml dosyasını inceleyelim : **
+**4_error_pod.yaml dosyasını inceleyelim :**
 
 2_pod_imageerror.yaml dosyasında imajın bulunamadığı durumdan bashetmiştik. Burada ise konteyner'in beklediği paremetrelerde hatalı giriş yaparsek eğer imaj bulunsa bile konteyner'a hatalı parametre gönderildiğinden dolayı pod'umuz çalışmaya başlayamacak. 
 
@@ -132,7 +132,7 @@ kubectl get pods
 
 ###
 
-5_CrashLoopBackUp.yaml dosyasını inceleyelim : 
+**5_CrashLoopBackUp.yaml dosyasını inceleyelim :**
 
 Kubernetes içinde bir pod oluşturduk. Oluşturduğumuz pod ise sürekli restart oluyor olsun. Kubernetes bir kaç restart boyunca her hangi bir müdahelede de bulunmaz fakat süreklilik arz etmeye başladıysa bu restart durumu , burada anormal giden bir şeyler olduğunu farkeder ve "CrashLoopBackOff" statüsüne pod'u alır. Bu statüye alınarak çalıştırılmaya çalışılan pod'un sağlıklı olmadığını kontrol edilmesi gerektiğini ilgili birimlere gösterilmesi sağlanır. 
 
