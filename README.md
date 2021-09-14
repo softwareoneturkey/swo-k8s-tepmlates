@@ -8,13 +8,12 @@
 Bölüm boyunca kubernetes komponentlerini temelden alarak advance seviyeye kadar inceleyecek ve uygulamalı olarak öğreneceğiz.
 
 
-* [POD](https://github.com/softwareoneturkey/swo-k8s-templates/tree/main/Pod) 
-* [Replicaset / Replication Controller](https://github.com/softwareoneturkey/swo-k8s-templates/tree/main/ReplicaSet-ReplicationController)
-* [Deployment](https://github.com/softwareoneturkey/swo-k8s-templates/tree/main/Deployment) 
-* [Service](https://github.com/softwareoneturkey/swo-k8s-templates/tree/main/Service) 
-* [Label And Selector](https://github.com/softwareoneturkey/swo-k8s-templates) 
-* [Namespace](https://github.com/softwareoneturkey/swo-k8s-templates) 
-* [Service](https://github.com/softwareoneturkey/swo-k8s-templates) 
+* [POD](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Pod) 
+* [Replicaset / Replication Controller](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/ReplicaSet%20-%20ReplicationController)
+* [Deployment](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Deployment) 
+* [Service](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Service) 
+* [Label And Selector](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Label%20and%20Selectors) 
+* [Namespace](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Namespace) 
 
 
 
