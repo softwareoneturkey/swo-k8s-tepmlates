@@ -46,15 +46,13 @@ kubectl get all -o wide --show-labels
 
 Yukarıdaki komutu çalıştırdıktan sonra aşağıdakine benzer sonuçlar göreceğiz . 
 
-Name  |  Ready | Status | Restarts | AGE | IP | Node | NOMINATED NODE |  READINESS GATES | LABELS
-------------- | ------------- | ------------- | -------------| -------------| -------------
-pod/myapp-replicationcontroller-2txrb  | 1/1 | Running | 0 | 116s | 10.200.1.112 | worker-1 | none | none | app=rc-app-pod
-pod/myapp-replicationcontroller-bfqxd  | 1/1 | Running |0 | 116s | 10.200.1.113 | worker-1 | none | none | app=rc-app-pod
-pod/myapp-replicationcontroller-kmk6m | 1/1 | Running | 0 | 116s | 10.200.1.114 | worker-0 | none| none | app=rc-app-pod
+NAME                                    READY   STATUS    RESTARTS   AGE    IP             NODE       NOMINATED NODE   READINESS GATES   LABELS
+pod/myapp-replicationcontroller-2txrb   1/1     Running   0          116s   10.200.1.112   worker-1   <none>           <none>            app=rc-app-pod
+pod/myapp-replicationcontroller-bfqxd   1/1     Running   0          116s   10.200.1.113   worker-1   <none>           <none>            app=rc-app-pod
+pod/myapp-replicationcontroller-kmk6m   1/1     Running   0          116s   10.200.1.114   worker-1   <none>           <none>            app=rc-app-pod
 
-Name  |  Desired | Current | Ready | AGE | Containers | Images | Selector |  Labels
-------------- | ------------- | ------------- | -------------| -------------| -------------
-replicationcontroller/myapp-replicationcontroller  | 3 | 3 | 3 | 116s | nginxcontainer | nginx | app=rc-app-pod |  app=rc-app
+NAME                                                DESIRED   CURRENT   READY   AGE    CONTAINERS       IMAGES   SELECTOR         LABELS
+replicationcontroller/myapp-replicationcontroller   3         3         3       116s   nginxcontainer   nginx    app=rc-app-pod   app=rc-app
 
 Burada alttaki name sütununun altına baktığımızda "replicationcontroller/myapp-replicationcontroller" görmekteyiz. / dan önceki replicationcontroller , objenin tipini bize vermekte , bir üstte de pod yazmakta mesela , oradaki objelerin de pod olduğunu anlıyoruz.   
 Desired --> burada 3 rakamını görmekteyiz , 3 bize kaç tane pod replikası oluşturmak istediğimizi söylüyor , yaml dosyasında replicas'a 3 yazmıştık. 
@@ -77,16 +75,14 @@ kubectl delete pod -f myapp-replicationcontroller-2txrb
 --> komutuyla pod'u silelim 
 
 
-Name  |  Ready | Status | Restarts | AGE | IP | Node | NOMINATED NODE |  READINESS GATES | LABELS
-------------- | ------------- | ------------- | -------------| -------------| -------------
-pod/myapp-replicationcontroller-2txrb  | 1/1 | Terminating | 0 | 116s | 10.200.1.112 | worker-1 | none | none | app=rc-app-pod
-pod/myapp-replicationcontroller-bfqxd  | 1/1 | Running |0 | 116s | 10.200.1.113 | worker-1 | none | none | app=rc-app-pod
-pod/myapp-replicationcontroller-kmk6m | 1/1 | Running | 0 | 116s | 10.200.1.114 | worker-0 | none| none | app=rc-app-pod
-pod/myapp-replicationcontroller-948xz | 1/1 | Running | 0 | 116s | 10.200.1.115 | worker-0 | none| none | app=rc-app-pod
+NAME                                    READY   STATUS        RESTARTS   AGE   IP             NODE       NOMINATED NODE   READINESS GATES   LABELS
+pod/myapp-replicationcontroller-2txrb   0/1     Terminating   0          11m   10.200.1.112   worker-1   <none>           <none>            app=rc-app-pod
+pod/myapp-replicationcontroller-948xz   1/1     Running       0          4s    10.200.1.115   worker-1   <none>           <none>            app=rc-app-pod
+pod/myapp-replicationcontroller-bfqxd   1/1     Running       0          11m   10.200.1.113   worker-1   <none>           <none>            app=rc-app-pod
+pod/myapp-replicationcontroller-kmk6m   1/1     Running       0          11m   10.200.1.114   worker-1   <none>           <none>            app=rc-app-pod
 
-Name  |  Desired | Current | Ready | AGE | Containers | Images | Selector |  Labels
-------------- | ------------- | ------------- | -------------| -------------| -------------
-replicationcontroller/myapp-replicationcontroller  | 3 | 3 | 3 | 116s | nginxcontainer | nginx | app=rc-app-pod |  app=rc-app
+NAME                                                DESIRED   CURRENT   READY   AGE   CONTAINERS       IMAGES   SELECTOR         LABELS
+replicationcontroller/myapp-replicationcontroller   3         3         3       11m   nginxcontainer   nginx    app=rc-app-pod   app=rc-app
 
 
 myapp-replicationcontroller-2txrb --> pod ' u silinirken  pod/myapp-replicationcontroller-948xz --> pod'unun running duruma geçtiğini göreceğiz.  Replication Controller istenilen durum yani 3 pod'un sürekli olarak ayakta kalması durumunu bizim için sağladı ve bir pod' da problem olduğu anda anında aynı pod'dan yine oluşturarak çalışabilir hale getirdi.
