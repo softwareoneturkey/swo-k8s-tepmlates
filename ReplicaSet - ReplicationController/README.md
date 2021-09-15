@@ -146,6 +146,9 @@ kubectl get replicaset
 kubectl get rs 
 ```
 
---> komutları replicaset' leri listeler.
+--> komutları replicaset' leri listeler
 
-* [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/ReplicaSet%20-%20ReplicationController) 
+
+* [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Pod) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Deployment) 
+
+
