@@ -1,5 +1,5 @@
 
-    | 			Name	              | Ready | STATUS  | RESTARTS | AGE | 	IP      |    NODE  |
+    |                  Name                   | Ready | STATUS  | RESTARTS | AGE | 	IP      |    NODE  |
     | --------------------------------------- | ----- | ------- | -------- | --- | ------------ | -------- |
     | pod/myapp-replicationcontroller-2txrb   | 1/1   | Running |    0     | 15s | 10.200.1.112 | worker-1 |
     | pod/myapp-replicationcontroller-bfqxd   | 1/1   | Running |    0     | 15s | 10.200.1.113 | worker-1 |
