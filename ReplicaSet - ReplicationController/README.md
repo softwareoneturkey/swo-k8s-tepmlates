@@ -1,4 +1,5 @@
 
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/55376595/133267785-c3f76dc4-bf27-489c-99d0-6d610d84d692.jpg"/>
 </p>
@@ -147,4 +148,7 @@ kubectl get rs
 
 --> komutları replicaset' leri listeler
 
+
 * [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Pod) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Deployment) 
+
+
