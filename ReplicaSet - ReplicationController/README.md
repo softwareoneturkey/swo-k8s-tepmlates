@@ -1,9 +1,4 @@
 
-    |                  Name                   | Ready | STATUS  | RESTARTS | AGE | 	IP      |    NODE  | NOMINATED NODE | READINESS	|      LABELS    |
-    | --------------------------------------- | ----- | ------- | -------- | --- | ------------ | -------- | -------------- | --------- | -------------- |
-    | pod/myapp-replicationcontroller-2txrb   | 1/1   | Running |    0     | 15s | 10.200.1.112 | worker-1 |    <none>      |  <none>   | app=rc-app-pod |
-    | pod/myapp-replicationcontroller-bfqxd   | 1/1   | Running |    0     | 15s | 10.200.1.113 | worker-1 |    <none>      |  <none>   | app=rc-app-pod |
-    | pod/myapp-replicationcontroller-kmk6m   | 1/1   | Running |    0     | 15s | 10.200.1.114 | worker-0 |    <none>      |  <none>   | app=rc-app-pod |
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/55376595/133267785-c3f76dc4-bf27-489c-99d0-6d610d84d692.jpg"/>
