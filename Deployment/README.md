@@ -3,6 +3,7 @@
   <img src="https://user-images.githubusercontent.com/38957716/136303904-38404600-8b4b-43c7-9469-4482a46ef6d3.png"/>
 </p>
 
+
 Daha önce Pod ve ReplicaSet objelerini incelemiştik. Örneğin bir replicaset içerisinde pod dosyası hazırladık ve koyduk. Daha sonra bu pod dosyasında bir değişiklik oldu  ve yeni versiyona geçmek istiyoruz. Yeni versiyonu ReplicaSet dosyasında hazırlayıp kubectl apply -f rs.yaml komutuyla canlıya aldığımızda tüm podlar yeni versiyonda çalışmaya başlar. Peki yeni versiyonda bir problem var ve eski versiyona geçmemiz lazım , o zaman ne yapacağız ? Eğer biz bu işlemi ReplicaSet ile yapacak olursak eski versiyondaki yaml dosyasını tekrar hazırlayıp yüklememiz gerekiyor.Replicaset ile versiyn yönetimi yapamıyoruz fakat bunun için kubernetes bize deployment objesini veriyor.
 
 Deployment objesi ile versiyon geçişlerimizi kolaylıkla yapabilir , rollback işlemi gerektiği anda çok basit bir şekilde eski versiyona geçebiliriz.
