@@ -129,4 +129,4 @@ Daha sonra kubectl apply -f deployment_recreate.yaml --> komutunu tekrar çalı�
 
 	kubectl rollout resume deployment deployment_name --> Durdurulan rollout'un devam ettirilmesini sağlar. 
 
-* [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/ReplicaSet%20-%20ReplicationController) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Service) 
+* [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/ReplicaSet%20-%20ReplicationController) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Label%20and%20Selectors) 
