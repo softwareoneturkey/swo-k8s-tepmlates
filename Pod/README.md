@@ -3,7 +3,7 @@
 </p>
 
 ```yaml
-apiVersion: ##oluşturulacak olan komponentin hangi api versiyonunda geldiğini belirtmektedir. örneğin deployment objesi apps/v1  api versiyonunda gelmiştir.
+apiVersion: ##oluşturulacak olan komponentin hangi api versiyonunda geldiğini belirtmektedir.örneğin deployment objesi apps/v1  api versiyonunda gelmiştir.
 kind: ##oluşturulacak olan komponentin tipinin belirtildiği alandır. Örneğin " Pod , Deployment , Service , ReplicaSet" gibi.
 metadata: ##oluşturulacak olan komponentin temel özelliklerinin belirtildiği alandır , name , label , annotations gibi eklemeler burada yapılır.
 spec: ##oluşturulacak olan komponentin özelliklerinin , bağımlılıklarının ve tüm detaylarının belirtildiği alandır.
