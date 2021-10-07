@@ -1,4 +1,4 @@
-Kubernetes Servis Objesi 
+Kubernetes Servis Objesi  
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38957716/136458267-948bbf01-8fdc-410f-8e89-2ddaa02cba85.png"/>
