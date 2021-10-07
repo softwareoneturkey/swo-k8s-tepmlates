@@ -195,7 +195,6 @@ Bir pod'un içindeki konteyner'a  bağlanıp komut çalıştırabilmek :
 kubectl exec -it pod_name -c container_name --/bin/sh
 
 ```
-
 Label ve port özelliklerini  ekleyerek  pod oluşturma.
 ```bash
 kubectl run "pod_name" --image="image_name" --port="port_numarası" --labels"key:value" --restart=Never
