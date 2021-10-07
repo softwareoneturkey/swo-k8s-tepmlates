@@ -153,4 +153,4 @@ kubectl delete svc service_name
 kubectl describe  svc service_name
 ```
 
-* [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Deployment) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates) 
+* [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Namespace) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates) 
