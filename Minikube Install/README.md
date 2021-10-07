@@ -70,4 +70,4 @@ kubectl get nodes
 
 Komutnu çalıştırdığımızda , minikube'un bizim için bir node ayağa kaldırdığını görmekteyiz. Artık Cluster'ımız hazır , POD bölümüyle devam edebiliriz.
 
-* [<-- Geri](https://github.com/enespekdas/kubernetes) [/ ileri -->  ](https://github.com/enespekdas/kubernetes/tree/master/POD) 
+* [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Pod) 
