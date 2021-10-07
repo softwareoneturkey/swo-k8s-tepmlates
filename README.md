@@ -7,7 +7,6 @@
 
 Bölüm boyunca kubernetes komponentlerini temelden alarak advance seviyeye kadar inceleyecek ve uygulamalı olarak öğreneceğiz.
 
-
 * [Minikube Install](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Minikube%20Install) 
 * [POD](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Pod) 
 * [Replicaset / Replication Controller](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/ReplicaSet%20-%20ReplicationController)
