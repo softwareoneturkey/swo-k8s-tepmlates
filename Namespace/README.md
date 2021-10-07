@@ -3,6 +3,7 @@
   <img src="https://user-images.githubusercontent.com/38957716/136333926-d07bcd11-eb86-4fe7-b572-3aee9233759a.png"/>
 </p>
 
+
 Kubernetes pod objelerinden oluşmaktadır. Kubernetes ilk oluştuğunda bir pod kümesi oluşturur. Bu oluşturulan pod kümesi ayrı bir namespace'de oluşturulur. Bunun sebebi kubernetes'i kullanıcıdan yalıtmak ve yanlışlıkla kubernetes sistem podlarının silinmesini / değiştirilmesini veya müdahele edilmesini engellemektir. Bu namespace'in adı " kube-system " dir. Otomatik olarak oluşturulan ikinci namespace ise "kube-public" dir . Tüm kullanıcıların kullanımına sunulması gereken kaynaklar burada oluşturulur. Üçüncüsü ise default namespace'dir. Developer kubernetes cluster'a bağlandığında default olarak bu namespace'de çalışır. Oluşturduğu tüm objeler , yaptığı tüm işlemler bu namespace üzerinde gerçekleşmektedir. 
 
 Bir kubernetes cluster'ı kurumsal veya üretim amacıyla kullanıldıkça kendi namespace'lerinizi oluşturmak isteyebilirsiniz. Eğer ortam küçükse default namespace'inde devam edebilirsiniz .
