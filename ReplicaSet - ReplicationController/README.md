@@ -1,7 +1,7 @@
 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/55376595/133267785-c3f76dc4-bf27-489c-99d0-6d610d84d692.jpg"/>
+  <img src="https://user-images.githubusercontent.com/38957716/136303419-5e366b32-542c-4ab4-bdd8-1e31b83f2c63.png"/>
 </p>
 
 Pod bölümünde konteyner imajlarını kullanarak pod'lar oluşturduk ve uygulamalar çalıştırdık  fakat dikkat ettiyseniz bu işlemlerin tamamını manuel olarak yaptık. Örneğin bir pod da problem olduğu zaman gidip manuel olarak pod'u silip tekrar çalıştırmak zorunda kaldık. Başka bir örnek bir işten bir pod çalıştırdık , bizim uygulamamız 3 pod ile çalışacaksa gidip 3 ayrı pod yaml dosyası mı yazacağız ? Kubernetes pod'u kontrol edip otomatik olarak pod'un birine bir şey olduğunda yerine yenisini oluşturamıyor mu veya bizim belirlediğimiz kadar pod'u ayakta tutamıyor mu ? 
@@ -147,7 +147,6 @@ kubectl get rs
 ```
 
 --> komutları replicaset' leri listeler
-
 
 * [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Pod) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Deployment) 
 
