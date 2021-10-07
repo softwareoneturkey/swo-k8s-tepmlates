@@ -226,4 +226,4 @@ kubectl get all
 
 
 
-* [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/ReplicaSet%20-%20ReplicationController) 
+* [<-- Geri](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/Minikube%20Install) [/ ileri -->  ](https://github.com/softwareoneturkey/swo-k8s-tepmlates/tree/main/ReplicaSet%20-%20ReplicationController) 
