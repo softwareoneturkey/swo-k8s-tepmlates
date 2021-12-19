@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ozgurozturknet/k8s:latest
+        image: enespekdas/service-example:frontend
         ports:
         - containerPort: 80
 ---
@@ -38,6 +38,6 @@ spec:
     spec:
       containers:
       - name: backend
-        image: ozgurozturknet/k8s:backend
+        image: enespekdas/service-example:backend
         ports:
         - containerPort: 5000
