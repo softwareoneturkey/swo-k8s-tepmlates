@@ -1,4 +1,5 @@
 
+
 ## Container File Systems
 
 ![App Screenshot](https://user-images.githubusercontent.com/38957716/148538758-e624ae0a-0a43-458b-94d3-0143d0a86809.png)
@@ -101,6 +102,8 @@ Aşağıdaki adımları sırayla uygulayınız :
 
 İlk olarak emptydir volume örneği yaparak başlıyoruz : 
 
+
+```bash
 apiVersion: v1
 kind: Pod
 metadata:
@@ -129,8 +132,8 @@ spec:
       mountPath: /tmp/log
   volumes:
   - name: cache-vol
-    emptyDir: {}
-
+    emptyDir: {} 
+```
 
 
 Pod dosyasını incelediğimizde iki adet pod olduğunu görmekteyiz. Bu podlardan ilki frontend bir uygulamayken diğeri busybox uygulaması.
@@ -161,11 +164,15 @@ bu girdiğimiz parametre oluşturulmuş olan volume'ün adıdır.
 
 Yaml incelememizi tamamladığımıza göre adım adım yapmaya devam edelim . 
 
+```bash
+  kubectl apply -f emptydirVolumePod.yaml
 
-kubectl apply -f emptydirVolumePod.yaml
+```
+```bash
+  kubectl get pods 
 
+```
 
-kubectl get pods 
 
 ![App Screenshot](https://user-images.githubusercontent.com/38957716/148549921-0d7d73a2-3d8b-4a61-8bd2-03a09c87b548.png)
 
@@ -188,69 +195,128 @@ içine bağlanalım ve bir kaç işlem yapalım :
 
 ![App Screenshot](https://user-images.githubusercontent.com/38957716/148551098-30645c5c-faf8-480e-aadf-ca226e23999d.png)
 
-kubectl exec -it emptydir -c frontend -- bash 
+```bash
+  kubectl exec -it emptydir -c frontend -- bash 
+
+```
+
 
 Komutu ile emptydir pod'unun frontend container'ına bağlanıyoruz. 
 
 daha sonda ls yaparak neler var bakıyoruz,  burası container'dan gelen dosyalar.
 
-cd /
+```bash
+  cd /
+
+```
+
 
 Komutu ile root dizine gidiyoruz 
 
-ls
+```bash
+  ls
+
+```
 
 komutu ile root dizinindeki dosyaları görüntülüyoruz. Burada mount ettiğimiz klasör olan " cache " klasörünü görmekteyiz.
 
-cd cache/
+```bash
+  cd cache/
+
+```
+
 
 Komutu ile cache dizinine giriyoruz. 
 
-ls
+
+```bash
+  ls
+```
+
 
 komutu ile cache dizinini kontrol ediyoruz ve daha önce data koymadığımız için dizin şuanda boş durumda
 
-touch data1.txt
+```bash
+  touch data1.txt
 
-touch data2.txt
+```
+```bash
+  touch data2.txt
+
+```
+
 
 cache dosyasına iki adet dosya oluşturuyoruz , bu dosyaları oluşturmamızın sebebi bakalım gerçekten container silindiğinde yerine yeni container geldiğinde
 dosyalar duruyor mu sorusunun cevabını alabilmek.
 
-cd ..
+```bash
+  cd ..
+
+```
+
 
 komutu ile bir üst dizine çıkıyoruz
 
-ls
+
+```bash
+  ls
+```
+
 
 komutu ile buradaki dosyaları listeliyoruz
 
-mkdir testFolder
+```bash
+  mkdir testFolder
+
+```
 
 Komutu ile bir başka Folder oluşturuyoruz , bu dosyayı oluşturmamızın sebebi de gerçekten yeni container'da cache haricindeki 
 dosyalar siliniyor mu kontrol etmek.
 
-ls
+```bash
+  ls
+```
+
 
 komutu ile folder'ın oluştuğunu doğruluyoruz.
 
-cd testFolder
+```bash
+  cd testFolder
+
+```
+
 
 komutu ile testFolder dizinine giriyoruz 
 
-ls 
+ 
+```bash
+  ls
+```
+
 
 komutu ile dizinin boş olup olmadığını kontrol ediyoruz.
 
-touch data3.txt 
+
+```bash
+  touch data3.txt 
+
+```
 
 Komutu ile oluşturmuş olduğumuz dizine yeni bir dosya ekliyoruz.
 
-ls
+
+```bash
+ ls 
+```
+
 
 komutu ile kontrol ediyoruz ve dosyanın oluştuğunu doğruluyoruz.
 
-exit 
+ 
+```bash
+  exit
+```
+
 
 Frontend pod'u içerisinde yapacaklarımızı tamamladık , bu yüzden exit komutu ile Frontend pod'undan çıkış yapıyoruz.
 
@@ -262,32 +328,54 @@ exit komutu ile
 Frontend container'ında volume mount edilen cache dosya içerisinde iki adet dosya oluşturduk ayrıca testFolder diye başka bir folder oluşturduk bakalım sidecar container da volume mount edilen 
 folder'a girdiğimizde neler olacak :
 
-kubectl exec -it emptydir -c sidecar -- /bin/sh
+```bash
+  kubectl exec -it emptydir -c sidecar -- /bin/sh
+
+```
 
 komutu ile sidecar container'a bağlanıyoruz.
 
-ls 
+ 
+```bash
+  ls
+```
 
 komutu ile dosyaları listeliyoruz ve volume mount edilen " tmp " folder'ını burada görüyoruz.
 
-cd tmp/
+```bash
+  cd tmp/
+
+```
 
 Komutu ile tmp folder'ına giriyoruz
 
-ls
+```bash
+ ls 
+```
+
 
 Komutu ile tmp altındaki dosyaları listeliyoruz ve volume mount edilen log folder'ını görüyoruz.
 
-cd log/
+```bash
+  cd log/
+```
 
 Komutu ile log folder'ına giriyoruz.
 
-ls
+
+```bash
+ ls 
+```
+
 
 komutu ile log folder'ındaki dosyaları listelediğimizde görüyoruz ki bizim frontend uygulamasında 
 oluşturmuş olduğumuz data1.txt ve data2.txt dosyaları bu container'da da görünüyor.
 
-exit 
+ 
+
+```bash
+ exit 
+```
 
 komutu ile sidecar container ' dan çıkıyoruz. 
 
@@ -303,38 +391,66 @@ healthcheck folder'ını silersek eğer livenessprob fail edecek ve pod restart 
 Bu senaryoda neler çıkıyor kaşımıza inceleyelim 
 
 
-kubectl exec emptydir -c frontend -- rm -rf healthcheck
+
+```bash
+  kubectl exec emptydir -c frontend -- rm -rf healthcheck
+
+```
+
 
 komutu ile frontend container'ı içindeki healthcheck folder'ını siliyoruz. Böylece livenessprob fail olacak ve pod restart olacak.
 
-kubectl get posd -w 
+
+```bash
+  kubectl get posd -w 
+
+```
+
 
 komutu ile emptydir pod'unun restart kolonunu kontrol ediyoruz. Bir kaç saniye sonra pod'un restart olduğunu göreceğiz. 
 
 Tamam pod'umuz restart oldu , yani frontend container yeniden oluşturuldu. Sidecar container ise olduğu gibi kaldı.
 
 
-kubectl exec -it emptydir -c frontend -- bash
+
+```bash
+ kubectl exec -it emptydir -c frontend -- bash
+ 
+```
 
 komutu ile frontend pod'una bağlanıyoruz ve daha önceden frontend container'ındaki yaptığımız işlemleri kontrol ediyoruz.
 
-ls 
+ 
+```bash
+ ls 
+```
 
 komutu ile dosyaları listeliyoruz ve silmiş olduğumuz healthcheck folder'ının tekrar oluşturulduğunu görüyoruz
 
-cd /
+```bash
+  cd /
+
+```
 
 komutu ile root dizine gidiyoruz
 
-ls 
+ 
+```bash
+  ls
+```
+
 
 komutu ile dosyaları listeliyoruz ve daha önce oluşturmuş olduğumuz testFolder folder'ının gelmediğini görüyoruz.
 
+```bash
 cd cache/
 
+```
 komutu ile cache folder'ına giriyoruz.
 
-ls 
+```bash
+ls
+``` 
 
 komutu ile listeliyoruz ve daha önce oluşturmuş olduğumuz data1.txt ve data2.txt dosyalarının hala olduğunu görüyoruz.
 
@@ -343,28 +459,3 @@ ile birlikte gelmedi.
 
 
 
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://link-to-project
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run start
-```
