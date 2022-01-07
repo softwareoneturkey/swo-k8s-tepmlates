@@ -100,8 +100,7 @@ Genel olarak Ephemeral Volume'ler teorik olarak budur. Örneklerle teorik olarak
 Aşağıdaki adımları sırayla uygulayınız : 
 
 
-İlk olarak emptydir volume örneği yaparak başlıyoruz : 
-
+## EmptyDir Volume
 
 ```yaml
 apiVersion: v1
@@ -458,4 +457,66 @@ testFolder folder'ı default olarak container'ın içinde olmadığından ve vol
 ile birlikte gelmedi. 
 
 
+## HostPath Volume
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath
+spec:
+  containers:
+  - name: hostpathcontainer
+    image: enespekdas/volume_image:v1
+    ports:
+    - containerPort: 80
+    livenessProbe:
+      httpGet:
+        path: /healthcheck
+        port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    volumeMounts:
+    - name: directory-vol
+      mountPath: /dir1
+    - name: dircreate-vol
+      mountPath: /cache
+    - name: file-vol
+      mountPath: /cache/config.json       
+  volumes:
+  - name: directory-vol
+    hostPath:
+      path: /tmp
+      type: Directory
+  - name: dircreate-vol
+    hostPath:
+      path: /cache
+      type: DirectoryOrCreate
+  - name: file-vol
+    hostPath:
+      path: /cache/config.json
+      type: FileOrCreate
+```
 
+
+
+## Volumes
+
+- Directory
+
+  - Belirtilecek olan folder worker node üzerinde zaten var , varolan bu folder'ı pod'a mount edilir.
+- DirectoryOrCreate
+
+  - Eğer folder var ise kullan , yok ise folder'ı oluştur ve kullan anlamına gelmektedir.
+- FieOrCreate
+
+  - Eğer file var ise kullan , yok ise file'ı oluştur ve kullan anlamına gelmektedir. 
+
+**hostpathcontainer**
+
+
+**directory-vol** isimli **type: Directory** olan **dir1** folder'ına mount edilen volume için eğer **root** dizininde **tmp** folder'ı varsa mount işlemi yapılabilir. Eğer **root**'da **tmp** yok ise mount işlemi yapılamaz.
+
+
+**directory-vol** isimli **type: DirectoryOrCreate** olan volume için **cache** folder'ı **root**'da yoksa oluşturulur. Mount işlemi direkt gerçekleşir , eşleştirme yapılır. 
+
+**file-vol** isimli **type: FileOrCreate** olan volume için **/cache/config.json** dosyası var ise üzerine yazar yok ise **/cache/config.json** dosyasını oluşturup orada işlem yapılmaya başlanır. 
