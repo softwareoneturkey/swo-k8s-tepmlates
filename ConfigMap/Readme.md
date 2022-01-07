@@ -103,7 +103,7 @@ Aşağıdaki adımları sırayla uygulayınız :
 İlk olarak emptydir volume örneği yaparak başlıyoruz : 
 
 
-```bash
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
