@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tainttolerationnodeselector
+  name: taintdeploy
   labels:
     app: siebel
 spec:
