@@ -5,7 +5,7 @@ metadata:
   labels:
     app: siebel
 spec:
-  replicas: 20
+  replicas: 10
   selector:
     matchLabels:
       app: siebel
@@ -24,3 +24,12 @@ spec:
         image: quay.io/thoraxe/mapit
         ports:
         - containerPort: 80
+      tolerations:
+      - key: "env"
+        operator: "Equal"
+        value: "test"
+        effect: "NoSchedule"
+      - key: "bugra"
+        operator: "Equal"
+        value: "test"
+        effect: "NoSchedule"
