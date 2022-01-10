@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tainttolerationnodeselector
+  labels:
+    app: siebel
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: siebel
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: siebel
+    spec:
+      containers:
+      - name: mapit
+        image: quay.io/thoraxe/mapit
+        ports:
+        - containerPort: 80
+      tolerations:
+      - key: "color"
+        operator: "Equal"
+        value: "red"
+        effect: "NoExecute"
+      nodeSelector:
+        color: red
+        enes: pekdas
