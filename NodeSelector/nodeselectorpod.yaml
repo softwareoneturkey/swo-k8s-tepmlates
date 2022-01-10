@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeselectordeploy
+  labels:
+    app: siebel
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: siebel
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: siebel
+    spec:
+      containers:
+      - name: mapit
+        image: quay.io/thoraxe/mapit
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        enes: pekdas
