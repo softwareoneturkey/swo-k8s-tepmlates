@@ -6,7 +6,7 @@ Uygulamalar bazı noktalarda environment variable'lardan parametre alarak çalı
 
 Docker file da gerekli ayarlamaları yaptıktan sonra imajdan docker run komutu ile konteyner ayağa kaldırırken bu parametreleri vereibiyoruz. Gelin aşağıda bu işlemin örneğine bakalım . 
 
-
+docker exec -it condainer_name /bin/bash
 
 enespekdas/ubuntu-sleeper --> imajı kullanılacaktır. 
 
