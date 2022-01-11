@@ -82,9 +82,24 @@ spec:
 
 AccessModes kısmında bu volume’un aynı anda birden fazla pod’a bağlandığı zaman ne şekil bir 
 davranış sergileyebileceğini seçebiliyoruz. Burada 3 seçenek mevcut. 
+
 | Parameter         | Type                        | Description                |
 | :--------         | :-------                    | :------------------------- |
 | `ReadWriteOnce`   | `Okuma Yazma Tek Node`      | Bu volume aynı anda sadece tek bir node’a bağlanabilir ve bu pod hem bu volume’e yazabilir hem de okuyabilir  |
 | `ReadOnlyMany`    | `Sadece Okuma`              | Bu volume aynı anda birden fazla pod’a bağlanabilir fakat pod’lar sadece bu volume’de daha önceden yazılmış dosyalar varsa onları okuyabilir. Dosya yazamazlar .  |
-| `ReadWriteMany`  | `Okuma Yazma - Coklu Node`  | Aynı anda birden fazla pod’a bağlanarak hem yazılabilir hem okunabilir. |
+| `ReadWriteMany `  | `Okuma Yazma - Coklu Node`  | Aynı anda birden fazla pod’a bağlanarak hem yazılabilir hem okunabilir. |
 
+
+Burada kullanacağımız seçenekler storage driver'larının yeteneklerine göre değişiyor. Örneğin Azure üzerinde 
+**Azure Disk** kullanılırsa sadece ReadWriteOnce desteklenirken , Azure File tipi bir stroage ve driver kullanılırsa 
+bu sefer 3 seçenek de kullanılabilmekte. 
+
+## PersistentVolumeReclaimPolicy
+
+Pod volume'ü kullanmayı bıraktıktan sonra bu kullanılan volume'e ne yapılacağına dair seçimimizi yapıyoruz.
+
+| Parameter | Description                |
+| :-------- | :------------------------- |
+| `Retain`  | Bu volume aynı anda sadece tek bir node’a bağlanabilir ve bu pod hem bu volume’e yazabilir hem de okuyabilir  |
+| `Recycle` | Bu volume aynı anda birden fazla pod’a bağlanabilir fakat pod’lar sadece bu volume’de daha önceden yazılmış dosyalar varsa onları okuyabilir. Dosya yazamazlar .  |
+| `Delete ` | Aynı anda birden fazla pod’a bağlanarak hem yazılabilir hem okunabilir. |
