@@ -103,3 +103,19 @@ Pod volume'ü kullanmayı bıraktıktan sonra bu kullanılan volume'e ne yapıla
 | `Retain`  | Bu volume aynı anda sadece tek bir node’a bağlanabilir ve bu pod hem bu volume’e yazabilir hem de okuyabilir  |
 | `Recycle` | Bu volume aynı anda birden fazla pod’a bağlanabilir fakat pod’lar sadece bu volume’de daha önceden yazılmış dosyalar varsa onları okuyabilir. Dosya yazamazlar .  |
 | `Delete ` | Aynı anda birden fazla pod’a bağlanarak hem yazılabilir hem okunabilir. |
+
+
+Yukarıdaki yaml dosyasını bu bilgilerle inceleyecek olursak :
+
+  NFS tabanlı erişim sağlayan ve 172.17.0.2 ip adresi üzerinden erişilebilen bir stroage üzerindeki tmp isimli 
+  paylaşımı kullanacak. 5 gigibyte boyutunda sadece tek bir pod'a bağlanabilecek ve bu pod tarafından hem dosya yazmak hemde
+  dosya okumak için kullanılabilecek . Pod'un işi bittiği zaman içerisindeki dosyaların silineceği app:mysql label'ına sahip
+  bir **PersistentVolume** oluşturuyoruz.
+![App Screenshot](https://user-images.githubusercontent.com/38957716/148639342-34bc9098-c719-4f0a-85d4-e9ce59f8ce7a.png)
+
+  Bir volume'ü direkt olarak pod ile eşleştirme imkanına sahip değiliz , Bizler bir persistent volume'ü pod'a bağlamak için öncelikle 
+  **PersistentVolumeClaim** tipinde bir obje daha oluşturmamız gerekiyor.
+
+  **PersistentVolumeClaim** kısaca **PVC** , bizlerin sistemde bulunan **PV** yani **PersistentVolume** ' lerden uygun olanı işimiz için seçmemize imkan veren objelerdir.
+
+  
