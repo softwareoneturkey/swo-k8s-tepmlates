@@ -113,9 +113,175 @@ Yukarıdaki yaml dosyasını bu bilgilerle inceleyecek olursak :
   bir **PersistentVolume** oluşturuyoruz.
 ![App Screenshot](https://user-images.githubusercontent.com/38957716/148639342-34bc9098-c719-4f0a-85d4-e9ce59f8ce7a.png)
 
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysqlclaim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: ""
+  selector:
+    matchLabels:
+      app: mysql
+```
+
+
+
   Bir volume'ü direkt olarak pod ile eşleştirme imkanına sahip değiliz , Bizler bir persistent volume'ü pod'a bağlamak için öncelikle 
   **PersistentVolumeClaim** tipinde bir obje daha oluşturmamız gerekiyor.
 
   **PersistentVolumeClaim** kısaca **PVC** , bizlerin sistemde bulunan **PV** yani **PersistentVolume** ' lerden uygun olanı işimiz için seçmemize imkan veren objelerdir.
 
-  
+  Yukarıdaki resimde bulunan yaml dosyasını inceleyelim : 
+
+  apiVersion: v1 --> v1 versiyonunda eklenmiş kubernetes ' e.
+  kind: PersistentVolumeClaim --> obje tip isimli
+
+  metedata : --> mysqlclaim adında oluşturuyor.
+
+  Spec kısmı persistent volume’e çok benziyor burada da nekadarlık bir volume talep ettiğimizi , 
+  hangi mode ile bağlanmak istediğimizi belirtiyoruz.Son olarak pvc ile pv yi label kısmında eşleştiriyoruz. PVC’nin talebinin  
+  app:mysql olan pv tarafından sağlanmasını istiyoruz. 
+
+  Peki Kubernetes neden bu depolama oluşturma ve bağlanma işini iki farklı obje üzerinden hallediyor ? 
+
+  Bunu şöyle düşünelim , bir developer olarak kullandığımız Kubernetes cluster’ını biz yönetmiyor olabiliriz , o bizim işimiz olmayabilir.
+  Bunun için çalışan ayrı bir ekip olabilir. Dolayısı ile oradaki işlemleri bizim bilmemiz mümkün olmayabilir. A firmasında NFS tabanlı bir 
+  depolama ünitesi kullanılıyorken B firmasında Azure File tiğinde bir depolama ünitesi kullanılıyor olabilir. Bu ikisi için PV ayarları değişik olabilir. 
+  Yukarıda bahsetmiştik , Spec altındaki ayarlar depolama ünitelerine göre değişkenlik gösterebilir. Dolayısı ile bu volume oluşturma işini developer’a verirsek ,
+  developerin her cihaz için ayrı ayrı ayar yapmayı bilmesi gerekir ki bu oldukça zorlayıcı olacaktır. Kubernetes bu problem volume oluşturma ve oluşturulan volume’ü talep etme
+
+![App Screenshot](https://user-images.githubusercontent.com/38957716/148639350-b6fa2079-9f9e-456e-b0ce-b6e408941203.png)
+
+Elimizde pv ve buna bağlanabilecek pvc objelerini oluşturduk . Pod üzerinde kullanmak istediğimiz volume’ü talep eden persistent volume claim ile bir bağ kurarız.  
+Pod tanılarında volumes anahtarı altında yeni bir volume oluşturur ve bunu hedefini oluşturduğumuz persistent volume claim olarak belirler sonrasında bunu pod altında gerkeli path’e mount ederiz. 
+Bu pod oluşturulduğu anda bu talep devreye girer. Bu talebi karşılayan persistent volume objesindeki tanıma göre bu pod’un oluşturulacağı worker node üzerinde ayarlamalar yapılır. Storage cihazına bağlanılır.  
+Arkada driver yapması gerekenleri yapar ve sonucunda bu pod içerisindeki konteyner’in ilgili path’ine depolama cihazında bulunan bu volume bağlanır. Bu noktadan itibaren bu path’e yazılan dosyalar aslında bu volume’e yazılır. 
+Eğer bu pod bulunduğu worker node üzerinden bir şekilde silinir ve başka bir node’a taşınırsa bu sefer aynı işlemler o worker node üzerinde de gerçekleşir ve yeni pod’a bu volume bağlanır. 
+Bu sayede pod’un yaşam süresinden daha uzun süre veri saklama işlemini sağlayabileceğimiz bir altyapıya sahip olmuş oluruz. 
+
+
+## PV - PVC Uygulama 
+
+Uygulama Minikube tool'u kullanılarak yapılmaktadır. Docker Uygulamasının yüklü olması gerekmektedir. NFS server container'ı çalıştırıp 
+oradan storage mount etme işlemini yapacağız.
+
+![App Screenshot](https://user-images.githubusercontent.com/38957716/148938098-a8c4a250-236a-4b81-b643-c1a3aeb97559.png)
+
+Docker komutlarına geçmeden önce docker desktop uygulamasını açıyoruz ve volumes altına bakıyoruz . Göründüğü üzere herhangi bir volume tanımlanmamış durumda.
+
+
+```bash
+
+  docker volume create nfsvol
+
+```
+![App Screenshot](https://user-images.githubusercontent.com/38957716/148938198-826faf10-ce18-4d0b-b353-2c114f0fcb5b.png)
+
+Docker create vol komutunu çalıştırdık ve volumes altında **nfsvol** adında volume ayağa kalktığını görünüyoruz , fakat henüz hazır değil.
+
+
+```bash
+
+  docker network create --driver=bridge --subnet=10.255.255.0/24 --ip-range=10.255.255.0/24 --gateway=10.255.255.10 nfsnet
+
+```
+![App Screenshot](https://user-images.githubusercontent.com/38957716/148938425-8beb0ea5-ecbd-41fd-b828-e0d195fe233e.png)
+
+İkinci komutumuzla local ağımızda bir docker network oluşturuyoruz. Bu network sayesinde nfs server olarak çalışacak container'a bağlanabilecek ve data tutabileceğiz.
+
+
+```bash
+
+  docker run -dit --privileged --restart unless-stopped -e SHARED_DIRECTORY=/data -v nfsvol:/data --network nfsnet -p 2049:2049 --name nfssrv enespekdas/nfs:v1
+
+```
+![App Screenshot](https://user-images.githubusercontent.com/38957716/148938530-bf825222-16c8-4b17-a9a8-0739aecf3454.png)
+
+
+Volume oluşturduk  , Container'a bağlanabilmek için network oluşturduk . Şimdi de artık nfs olarak çalışacak container'ımızı ayağa kaldırdık ve artık nfs 
+container'ına bağlanıp data saklayabileceğiz. Tamamen bir simülasyon yaptığımızdan ve nfs server'ı ayarlamanın zor olacağından dolayı container olarak ayağa kaldırdık.
+
+
+Hazırlıklarımız tamamlandığına göre artık kubernetes tarafında işlem yapmaya başlayabiliriz. 
+
+## PersistentVolume - pv.yaml 
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+   name: mysqlpv
+   labels:
+     app: mysql
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    path: /
+    server: 10.255.255.10
+```
+
+```bash
+
+  kubectl apply -f pv.yaml
+
+```
+
+**mysqlpv** adında bir persistent volume oluşturuyoruz .
+
+```bash
+
+  kubectl get pv 
+
+```
+
+Oluşturulan pv'leri listeliyoruz.
+
+
+## PersistentVolumeClaim - pvc.yaml
+PV oluşturma işlemini tamamladıktan sonra , Bu PV'ye mount olacak PVC objesini oluşturacağız , oradan da deployment
+objesine PVC ' yi mount ederek işlemi tamamlayacağız. 
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysqlclaim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: ""
+  selector:
+    matchLabels:
+      app: mysql
+```
+
+```bash
+
+  kubectl apply -f pvc.yaml
+
+```
+
+**mysqlclaim** adında bir persistent volume claim oluşturuyoruz.
+
+```bash
+
+  kubectl get pv 
+
+```
+![App Screenshot](https://user-images.githubusercontent.com/38957716/148940314-6a509cae-50a7-4554-b3fa-b5c45f66cd85.png)
+
