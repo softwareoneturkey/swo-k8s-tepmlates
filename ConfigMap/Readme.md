@@ -285,3 +285,9 @@ spec:
 ```
 ![App Screenshot](https://user-images.githubusercontent.com/38957716/148940314-6a509cae-50a7-4554-b3fa-b5c45f66cd85.png)
 
+Oluşturulan pvc'leri listeliyoruz.
+
+
+NFS server , NFS server'a bağlanacak olan PersistentVolume ve PersistentVolume ile deployment'ın iletişime geçmesini sağlayacak olan 
+PersistentVolumeClaim objesini oluşturduk. En son adım kaldı o da uygulamayı ayağa kaldırmamız. Yapalım o halde
+
